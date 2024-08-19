@@ -14,5 +14,5 @@ public interface BankAmountService {
 
     BankAmount update(BankAmount bankAmount);
 
-    void delete(Integer id);
+    void delete(BankAmount bankAmount);
 }

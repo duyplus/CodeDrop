@@ -21,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "roles")
 public class Role implements Serializable {
+
     @Id
     @Column(name = "id", nullable = false, length = 5)
     private String id;
@@ -38,5 +39,4 @@ public class Role implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "role")
     List<Authority> authorities;
-
 }

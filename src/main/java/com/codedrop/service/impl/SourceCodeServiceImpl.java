@@ -35,7 +35,7 @@ public class SourceCodeServiceImpl implements SourceCodeService {
     }
 
     @Override
-    public void delete(Integer id) {
-        sourceCodeRepository.deleteById(id);
+    public void delete(SourceCode sourceCode) {
+        sourceCodeRepository.delete(sourceCode);
     }
 }

@@ -22,5 +22,5 @@ public interface UserService {
 
     User findByToken(String token);
 
-//    void loginOAuth2(OAuth2AuthenticationToken oauth2);
+    void saveOrUpdateOAuthUser(String email, String username, String fullname, String photo);
 }

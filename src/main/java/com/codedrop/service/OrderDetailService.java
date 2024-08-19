@@ -1,6 +1,5 @@
 package com.codedrop.service;
 
-
 import com.codedrop.model.OrderDetail;
 
 import java.util.List;
@@ -15,5 +14,5 @@ public interface OrderDetailService {
 
     OrderDetail update(OrderDetail orderDetail);
 
-    void delete(Integer id);
+    void delete(OrderDetail orderDetail);
 }

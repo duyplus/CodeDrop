@@ -23,6 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "source_code")
 public class SourceCode implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -126,5 +127,4 @@ public class SourceCode implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "source", fetch = FetchType.EAGER)
     List<SourceType> sourceTypes;
-
 }

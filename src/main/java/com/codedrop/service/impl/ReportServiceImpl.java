@@ -35,7 +35,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void delete(Integer id) {
-        reportRepository.deleteById(id);
+    public void delete(Report report) {
+        reportRepository.delete(report);
     }
 }

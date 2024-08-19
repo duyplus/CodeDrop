@@ -14,5 +14,5 @@ public interface FeedbackService {
 
     Feedback update(Feedback feedback);
 
-    void delete(Integer id);
+    void delete(Feedback feedback);
 }

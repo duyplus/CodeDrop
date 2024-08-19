@@ -35,7 +35,7 @@ public class SourceTypeServiceImpl implements SourceTypeService {
     }
 
     @Override
-    public void delete(Integer id) {
-        sourceTypeRepository.deleteById(id);
+    public void delete(SourceType sourceType) {
+        sourceTypeRepository.delete(sourceType);
     }
 }

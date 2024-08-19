@@ -1,7 +1,7 @@
 package com.codedrop.controller;
 
 import com.codedrop.model.Authority;
-import com.codedrop.model.Role;
+import com.codedrop.model.User;
 import com.codedrop.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
@@ -29,12 +28,14 @@ public class AuthorityController {
     }
 
     @PostMapping
-    public Authority create(@RequestBody Authority auth) {
-        return authorityService.create(auth);
+    public Authority create(@RequestBody Authority authority) {
+        return authorityService.create(authority);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") Integer id) {
-        authorityService.delete(id);
+    public ResponseEntity<HttpStatus> delete(@PathVariable int id) {
+        Authority authority = authorityService.findById(id);
+        authorityService.delete(authority);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

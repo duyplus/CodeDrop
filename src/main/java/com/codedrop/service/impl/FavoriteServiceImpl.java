@@ -35,7 +35,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
-    public void delete(Integer id) {
-        favoriteRepository.deleteById(id);
+    public void delete(Favorite favorite) {
+        favoriteRepository.delete(favorite);
     }
 }

@@ -5,14 +5,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public interface AuthorityService {
 
-    public List<Authority> findAuthoritiesOfAdministrators();
+    List<Authority> findAll();
 
-    public List<Authority> findAll();
+    Authority findById(Integer id);
 
-    public Authority create(Authority auth);
+    Authority create(Authority authority);
 
-    public void delete(Integer id);
+    void delete(Authority authority);
 }

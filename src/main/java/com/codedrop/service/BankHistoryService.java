@@ -14,5 +14,5 @@ public interface BankHistoryService {
 
     BankHistory update(BankHistory bankHistory);
 
-    void delete(Integer id);
+    void delete(BankHistory bankHistory);
 }

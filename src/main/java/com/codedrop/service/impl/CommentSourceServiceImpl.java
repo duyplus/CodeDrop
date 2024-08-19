@@ -1,10 +1,7 @@
 package com.codedrop.service.impl;
 
-import com.codedrop.model.Comment;
 import com.codedrop.model.CommentSource;
-import com.codedrop.repository.CommentRepository;
 import com.codedrop.repository.CommentSourceRepository;
-import com.codedrop.service.CommentService;
 import com.codedrop.service.CommentSourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +35,7 @@ public class CommentSourceServiceImpl implements CommentSourceService {
     }
 
     @Override
-    public void delete(Integer id) {
-        commentSourceRepository.deleteById(id);
+    public void delete(CommentSource commentSource) {
+        commentSourceRepository.delete(commentSource);
     }
 }

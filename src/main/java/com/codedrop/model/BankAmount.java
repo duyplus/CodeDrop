@@ -18,6 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "bank_amount")
 public class BankAmount implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -38,5 +39,4 @@ public class BankAmount implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
 }

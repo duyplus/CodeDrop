@@ -14,5 +14,5 @@ public interface PostService {
 
     Post update(Post post);
 
-    void delete(Integer id);
+    void delete(Post post);
 }

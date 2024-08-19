@@ -14,5 +14,5 @@ public interface FavoriteService {
 
     Favorite update(Favorite favorite);
 
-    void delete(Integer id);
+    void delete(Favorite favorite);
 }

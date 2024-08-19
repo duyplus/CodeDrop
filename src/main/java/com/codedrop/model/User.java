@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Nationalized;
 
 import java.io.Serializable;
@@ -23,6 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "users")
 public class User implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -30,7 +32,6 @@ public class User implements Serializable {
 
     @Size(max = 100)
     @NotNull
-    @Nationalized
     @Column(name = "user_code", nullable = false, length = 100)
     private String userCode;
 
@@ -124,4 +125,10 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "seller", fetch = FetchType.EAGER)
     List<SourceCode> sourceCodes;
 
+    @PostPersist
+    public void generateUserCode() {
+        if (this.userCode == null) {
+            this.userCode = String.format("cod%06d", this.id);
+        }
+    }
 }

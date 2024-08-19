@@ -29,5 +29,4 @@ public class RoleController {
         }
         return new ResponseEntity<List<Role>>(roles, HttpStatus.OK);
     }
-
 }

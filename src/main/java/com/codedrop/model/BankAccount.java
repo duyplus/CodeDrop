@@ -23,6 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "bank_account")
 public class BankAccount implements Serializable {
+
     @Id
     @Size(max = 50)
     @Nationalized
@@ -62,5 +63,4 @@ public class BankAccount implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "bank", fetch = FetchType.EAGER)
     List<User> users;
-
 }

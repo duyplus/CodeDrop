@@ -19,6 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "order_detail")
 public class OrderDetail implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -42,5 +43,4 @@ public class OrderDetail implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "buyer_id", nullable = false)
     private User buyer;
-
 }

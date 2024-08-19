@@ -19,6 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "favorite")
 public class Favorite implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -42,5 +43,4 @@ public class Favorite implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
 }

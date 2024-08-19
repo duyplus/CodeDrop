@@ -19,6 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "feedback")
 public class Feedback implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -45,5 +46,4 @@ public class Feedback implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "source_id", nullable = false)
     private SourceCode source;
-
 }

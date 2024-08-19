@@ -14,5 +14,5 @@ public interface CommentSourceService {
 
     CommentSource update(CommentSource commentSource);
 
-    void delete(Integer id);
+    void delete(CommentSource commentSource);
 }

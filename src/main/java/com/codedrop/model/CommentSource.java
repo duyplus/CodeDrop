@@ -17,6 +17,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Table(name = "comment_source")
 public class CommentSource implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -35,5 +36,4 @@ public class CommentSource implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "source_id", nullable = false)
     private SourceCode source;
-
 }

@@ -17,6 +17,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Table(name = "source_type", uniqueConstraints = {@UniqueConstraint(columnNames = {"source_id", "category_id"})})
 public class SourceType implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -35,5 +36,4 @@ public class SourceType implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-
 }

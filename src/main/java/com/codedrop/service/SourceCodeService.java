@@ -14,5 +14,5 @@ public interface SourceCodeService {
 
     SourceCode update(SourceCode sourceCode);
 
-    void delete(Integer id);
+    void delete(SourceCode sourceCode);
 }

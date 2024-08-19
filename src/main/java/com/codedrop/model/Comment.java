@@ -23,6 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "comment")
 public class Comment implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -58,5 +59,4 @@ public class Comment implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "comment", fetch = FetchType.EAGER)
     List<CommentSource> commentSources;
-
 }

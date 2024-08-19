@@ -20,6 +20,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "post")
 public class Post implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -53,5 +54,4 @@ public class Post implements Serializable {
     @ColumnDefault("0")
     @Column(name = "is_delete")
     private Boolean isDelete;
-
 }

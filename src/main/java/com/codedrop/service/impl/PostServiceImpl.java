@@ -25,17 +25,17 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post create(Post orderDetail) {
-        return postRepository.save(orderDetail);
+    public Post create(Post post) {
+        return postRepository.save(post);
     }
 
     @Override
-    public Post update(Post orderDetail) {
-        return postRepository.save(orderDetail);
+    public Post update(Post post) {
+        return postRepository.save(post);
     }
 
     @Override
-    public void delete(Integer id) {
-        postRepository.deleteById(id);
+    public void delete(Post post) {
+        postRepository.delete(post);
     }
 }

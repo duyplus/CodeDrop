@@ -21,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "category")
 public class Category implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -45,5 +46,4 @@ public class Category implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     List<SourceType> sourceTypes;
-
 }

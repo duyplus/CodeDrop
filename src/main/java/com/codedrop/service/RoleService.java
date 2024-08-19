@@ -5,5 +5,14 @@ import com.codedrop.model.Role;
 import java.util.List;
 
 public interface RoleService {
-    public List<Role> findAll();
+
+    List<Role> findAll();
+
+    Role findById(String id);
+
+    Role create(Role role);
+
+    Role update(Role role);
+
+    void delete(Role role);
 }

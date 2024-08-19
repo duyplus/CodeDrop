@@ -14,5 +14,5 @@ public interface BankAccountService {
 
     BankAccount update(BankAccount bankAccount);
 
-    void delete(String id);
+    void delete(BankAccount bankAccount);
 }

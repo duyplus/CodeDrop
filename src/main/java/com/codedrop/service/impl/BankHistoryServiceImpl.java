@@ -35,7 +35,7 @@ public class BankHistoryServiceImpl implements BankHistoryService {
     }
 
     @Override
-    public void delete(Integer id) {
-        bankHistoryRepository.deleteById(id);
+    public void delete(BankHistory bankHistory) {
+        bankHistoryRepository.delete(bankHistory);
     }
 }

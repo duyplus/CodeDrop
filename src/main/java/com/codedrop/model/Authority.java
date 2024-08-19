@@ -18,6 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Table(name = "authority", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})})
 public class Authority implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -34,5 +35,4 @@ public class Authority implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
-
 }

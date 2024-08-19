@@ -1,13 +1,19 @@
 package com.codedrop.service.impl;
 
 import com.codedrop.exception.ResourceNotFoundException;
+import com.codedrop.model.Authority;
+import com.codedrop.model.Role;
 import com.codedrop.model.User;
+import com.codedrop.repository.AuthorityRepository;
+import com.codedrop.repository.RoleRepository;
 import com.codedrop.repository.UserRepository;
 import com.codedrop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,6 +21,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private PasswordEncoder pe;
@@ -59,14 +71,30 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByToken(token);
     }
 
-//    @Override
-//    public void loginOAuth2(OAuth2AuthenticationToken oauth2) {
-//        // String fullname = oauth2.getPrincipal().getAttribute("name");
-//        String email = oauth2.getPrincipal().getAttribute("email");
-//        String password = Long.toHexString(System.currentTimeMillis());
-//
-//        UserDetails user = User.withUsername(email).password(pe.encode(password)).roles("USER").build();
-//        Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-//        SecurityContextHolder.getContext().setAuthentication(auth);
-//    }
+    @Transactional
+    public void saveOrUpdateOAuthUser(String email, String username, String fullname, String photo) {
+        User existing = userRepository.findByEmail(email);
+        if (existing == null) {
+            User user = new User();
+            user.setEmail(email);
+            user.setUsername(username);
+            user.setPassword(pe.encode("123456"));
+            user.setFullname(fullname);
+            user.setPhoto(photo);
+            user.setCreatedAt(new Date());
+            user.setUpdatedAt(new Date());
+            user.setIsDelete(false);
+            user = userRepository.save(user);
+            Role userRole = roleRepository.findByName("USER");
+            if (userRole != null) {
+                Authority authority = new Authority();
+                authority.setRole(userRole);
+                authority.setUser(user);
+                authorityRepository.save(authority);
+            }
+        } else {
+            existing.setUpdatedAt(new Date());
+            userRepository.save(existing);
+        }
+    }
 }

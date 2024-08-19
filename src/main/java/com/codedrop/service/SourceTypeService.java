@@ -14,5 +14,5 @@ public interface SourceTypeService {
 
     SourceType update(SourceType sourceType);
 
-    void delete(Integer id);
+    void delete(SourceType sourceType);
 }

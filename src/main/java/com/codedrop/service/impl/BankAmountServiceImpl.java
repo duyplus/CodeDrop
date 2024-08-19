@@ -35,7 +35,7 @@ public class BankAmountServiceImpl implements BankAmountService {
     }
 
     @Override
-    public void delete(Integer id) {
-        bankAmountRepository.deleteById(id);
+    public void delete(BankAmount bankAmount) {
+        bankAmountRepository.delete(bankAmount);
     }
 }

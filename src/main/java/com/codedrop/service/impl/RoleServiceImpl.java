@@ -14,7 +14,28 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     RoleRepository roleRepository;
 
+    @Override
     public List<Role> findAll() {
         return roleRepository.findAll();
+    }
+
+    @Override
+    public Role findById(String id) {
+        return roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found with id " + id));
+    }
+
+    @Override
+    public Role create(Role role) {
+        return roleRepository.save(role);
+    }
+
+    @Override
+    public Role update(Role role) {
+        return roleRepository.save(role);
+    }
+
+    @Override
+    public void delete(Role role) {
+        roleRepository.delete(role);
     }
 }

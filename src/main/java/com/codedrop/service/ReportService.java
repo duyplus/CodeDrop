@@ -14,5 +14,5 @@ public interface ReportService {
 
     Report update(Report report);
 
-    void delete(Integer id);
+    void delete(Report report);
 }

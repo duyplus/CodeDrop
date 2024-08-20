@@ -1,4 +1,4 @@
-package com.codedrop;
+package com.codedrop.security;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
-public class OpenAPIConfiguration {
+public class OpenAPIConfig {
 
     @Bean
     public OpenAPI defineOpenApi() {

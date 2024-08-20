@@ -77,12 +77,12 @@ public class User implements Serializable {
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "created_at")
-    private Date createdAt = new Date();
+    private Date createdAt;
 
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "updated_at")
-    private Date updatedAt = new Date();
+    private Date updatedAt;
 
     @ColumnDefault("0")
     @Column(name = "is_delete")

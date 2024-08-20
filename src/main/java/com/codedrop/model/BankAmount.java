@@ -30,7 +30,7 @@ public class BankAmount implements Serializable {
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "updated_at")
-    private Date updatedAt = new Date();
+    private Date updatedAt;
 
     @ColumnDefault("0")
     @Column(name = "is_delete")

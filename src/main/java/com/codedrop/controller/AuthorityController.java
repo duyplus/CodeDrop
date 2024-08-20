@@ -1,7 +1,6 @@
 package com.codedrop.controller;
 
 import com.codedrop.model.Authority;
-import com.codedrop.model.User;
 import com.codedrop.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

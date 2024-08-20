@@ -33,7 +33,7 @@ public class BankHistory implements Serializable {
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "created_at")
-    private Date createdAt = new Date();
+    private Date createdAt;
 
     @ColumnDefault("0")
     @Column(name = "is_delete")

@@ -1,12 +1,15 @@
 package com.codedrop.service;
 
 import com.codedrop.model.User;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface UserService {
 
     List<User> findAll();
+
+    Page<User> findPaginate(int page, int size);
 
     User findById(Integer id);
 

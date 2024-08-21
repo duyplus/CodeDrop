@@ -9,6 +9,9 @@ import com.codedrop.repository.RoleRepository;
 import com.codedrop.repository.UserRepository;
 import com.codedrop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,13 +35,18 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder pe;
 
     @Override
-    public User findById(Integer id) {
-        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + id));
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public Page<User> findPaginate(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return userRepository.findAll(pageable);
     }
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public User findById(Integer id) {
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + id));
     }
 
     @Override

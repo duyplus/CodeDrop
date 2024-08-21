@@ -1,5 +1,6 @@
 package com.codedrop.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Builder
@@ -38,6 +40,16 @@ public class Category implements Serializable {
     @Nationalized
     @Column(name = "type", nullable = false, length = 50)
     private String type;
+
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "updated_at")
+    private Date updatedAt;
 
     @ColumnDefault("0")
     @Column(name = "is_delete")

@@ -46,6 +46,11 @@ public class Comment implements Serializable {
     @Column(name = "created_at")
     private Date createdAt;
 
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
     @ColumnDefault("0")
     @Column(name = "is_delete")
     private Boolean isDelete;

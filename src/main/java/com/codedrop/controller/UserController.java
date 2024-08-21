@@ -3,6 +3,7 @@ package com.codedrop.controller;
 import com.codedrop.model.User;
 import com.codedrop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,12 +23,16 @@ public class UserController {
     private PasswordEncoder pe;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll() {
-        List<User> item = userService.findAll();
-        if (item.isEmpty()) {
-            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<?> getAll(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
+        if (page == null || size == null) {
+            List<User> users = userService.findAll();
+            if (users.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(users, HttpStatus.OK);
         }
-        return new ResponseEntity<List<User>>(item, HttpStatus.OK);
+        Page<User> usersPage = userService.findPaginate(page, size);
+        return new ResponseEntity<>(usersPage, HttpStatus.OK);
     }
 
     @GetMapping("{id}")

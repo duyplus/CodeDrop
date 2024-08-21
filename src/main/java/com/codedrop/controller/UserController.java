@@ -1,5 +1,6 @@
 package com.codedrop.controller;
 
+import com.codedrop.dto.CustomPage;
 import com.codedrop.model.User;
 import com.codedrop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,15 @@ public class UserController {
     @GetMapping
     public ResponseEntity<?> getAll(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
         if (page == null || size == null) {
-            List<User> users = userService.findAll();
-            if (users.isEmpty()) {
+            List<User> item = userService.findAll();
+            if (item.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(users, HttpStatus.OK);
+            return new ResponseEntity<>(item, HttpStatus.OK);
         }
-        Page<User> usersPage = userService.findPaginate(page, size);
-        return new ResponseEntity<>(usersPage, HttpStatus.OK);
+//        Page<User> paging = userService.findPaginate(page, size);
+        CustomPage<User> paging = new CustomPage<User>(userService.findPaginate(page, size));
+        return new ResponseEntity<>(paging, HttpStatus.OK);
     }
 
     @GetMapping("{id}")

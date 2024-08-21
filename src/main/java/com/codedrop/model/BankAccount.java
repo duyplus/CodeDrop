@@ -30,6 +30,10 @@ public class BankAccount implements Serializable {
     @Column(name = "bank_number", nullable = false, length = 50)
     private String bankNumber;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+
     @Size(max = 100)
     @NotNull
     @Nationalized

@@ -45,14 +45,12 @@ public class UserController {
         } else {
             try {
                 JsonNode queryNode = objectMapper.readTree(query);
-                // Xử lý condition
                 JsonNode conditionNode = queryNode.get("condition");
                 if (conditionNode != null && conditionNode.isObject()) {
                     conditionNode.fields().forEachRemaining(entry -> {
                         conditions.put(entry.getKey(), entry.getValue().asText());
                     });
                 }
-                // Xử lý pagination
                 JsonNode paginationNode = queryNode.get("pagination");
                 if (paginationNode != null) {
                     page = paginationNode.has("page") ? paginationNode.get("page").asInt() : 0;
@@ -62,7 +60,6 @@ public class UserController {
                 return new ResponseEntity<>("Invalid query format", HttpStatus.BAD_REQUEST);
             }
         }
-        // Gọi service để lấy dữ liệu dựa trên các điều kiện và thông tin phân trang
         Page<User> paginatedUsers = userService.findPaginateWithConditions(page, size, conditions);
         CustomPage<User> customPage = new CustomPage<>(paginatedUsers);
         return new ResponseEntity<>(customPage, HttpStatus.OK);

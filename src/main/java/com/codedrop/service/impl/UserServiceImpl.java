@@ -59,17 +59,11 @@ public class UserServiceImpl implements UserService {
     private Specification<User> createSpecification(Map<String, String> conditions) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-
             for (Map.Entry<String, String> entry : conditions.entrySet()) {
                 String field = entry.getKey();
                 String value = entry.getValue();
-
-                predicates.add(criteriaBuilder.like(
-                        criteriaBuilder.lower(root.get(field)),
-                        "%" + value.toLowerCase() + "%"
-                ));
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get(field)), "%" + value.toLowerCase() + "%"));
             }
-
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }

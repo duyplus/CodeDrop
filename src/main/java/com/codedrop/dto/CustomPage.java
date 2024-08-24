@@ -15,7 +15,9 @@ public class CustomPage<T> {
         this.content = page.getContent();
         this.pagination = new CustomPageable(
             page.getPageable().getPageNumber(),
-            page.getPageable().getPageSize()
+            page.getPageable().getPageSize(),
+            page.getTotalPages(),
+            page.getTotalElements()
         );
     }
 
@@ -23,10 +25,14 @@ public class CustomPage<T> {
     static class CustomPageable {
         int page;
         int pageSize;
+        long totalPages;
+        long totalItems;
 
-        public CustomPageable(int page, int pageSize) {
+        public CustomPageable(int page, int pageSize, long totalPages, long totalItems) {
             this.page = page;
             this.pageSize = pageSize;
+            this.totalPages = totalPages;
+            this.totalItems = totalItems;
         }
     }
 }

@@ -2,10 +2,11 @@ package com.codedrop.repository;
 
 import com.codedrop.model.SourceCode;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SourceCodeRepository extends JpaRepository<SourceCode, Integer> {
+public interface SourceCodeRepository extends JpaRepository<SourceCode, Integer>, JpaSpecificationExecutor<SourceCode> {
 
 //    @Modifying
 //    @Query(value = "exec getTopSourceCode", nativeQuery = true)

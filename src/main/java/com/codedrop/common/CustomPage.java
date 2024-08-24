@@ -1,4 +1,4 @@
-package com.codedrop.dto;
+package com.codedrop.common;
 
 import lombok.Data;
 import org.springframework.data.domain.Page;

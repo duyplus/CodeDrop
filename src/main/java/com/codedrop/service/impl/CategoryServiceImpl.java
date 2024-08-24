@@ -1,12 +1,18 @@
 package com.codedrop.service.impl;
 
+import com.codedrop.common.CustomSpecification;
 import com.codedrop.model.Category;
 import com.codedrop.repository.CategoryRepository;
 import com.codedrop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -17,6 +23,17 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> findAll() {
         return categoryRepository.findAll();
+    }
+
+    public Page<Category> findPaginate(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return categoryRepository.findAll(pageable);
+    }
+
+    public Page<Category> findPaginateWithConditions(int page, int size, Map<String, String> conditions) {
+        Pageable pageable = PageRequest.of(page, size);
+        Specification<Category> specification = CustomSpecification.createSpecification(conditions);
+        return categoryRepository.findAll(specification, pageable);
     }
 
     @Override

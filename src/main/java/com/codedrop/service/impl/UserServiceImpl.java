@@ -1,5 +1,6 @@
 package com.codedrop.service.impl;
 
+import com.codedrop.common.CustomSpecification;
 import com.codedrop.exception.ResourceNotFoundException;
 import com.codedrop.model.Authority;
 import com.codedrop.model.Role;
@@ -8,7 +9,6 @@ import com.codedrop.repository.AuthorityRepository;
 import com.codedrop.repository.RoleRepository;
 import com.codedrop.repository.UserRepository;
 import com.codedrop.service.UserService;
-import jakarta.persistence.criteria.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,10 +17,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -52,20 +49,8 @@ public class UserServiceImpl implements UserService {
 
     public Page<User> findPaginateWithConditions(int page, int size, Map<String, String> conditions) {
         Pageable pageable = PageRequest.of(page, size);
-        Specification<User> specification = createSpecification(conditions);
+        Specification<User> specification = CustomSpecification.createSpecification(conditions);
         return userRepository.findAll(specification, pageable);
-    }
-
-    private Specification<User> createSpecification(Map<String, String> conditions) {
-        return (root, query, criteriaBuilder) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            for (Map.Entry<String, String> entry : conditions.entrySet()) {
-                String field = entry.getKey();
-                String value = entry.getValue();
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get(field)), "%" + value.toLowerCase() + "%"));
-            }
-            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-        };
     }
 
     @Override

@@ -1,13 +1,17 @@
 package com.codedrop.controller;
 
+import com.codedrop.common.CustomPage;
+import com.codedrop.common.CustomQueryParsing;
 import com.codedrop.model.Comment;
 import com.codedrop.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin("*")
 @RestController
@@ -17,13 +21,30 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    private CustomQueryParsing customQueryParsing;
+
     @GetMapping
-    public ResponseEntity<List<Comment>> getAll() {
-        List<Comment> item = commentService.findAll();
-        if (item.isEmpty()) {
-            return new ResponseEntity<List<Comment>>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<?> getAll(@RequestParam(required = false) String query) {
+        if (query == null) {
+            List<Comment> items = commentService.findAll();
+            if (items.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(items, HttpStatus.OK);
+        } else {
+            try {
+                CustomQueryParsing.ParsedQuery parsedQuery = customQueryParsing.safeParseQuery(query);
+                Map<String, String> conditions = parsedQuery.getConditions();
+                int page = parsedQuery.getPage();
+                int size = parsedQuery.getSize();
+                Page<Comment> paginatedUsers = commentService.findPaginateWithConditions(page, size, conditions);
+                CustomPage<Comment> customPage = new CustomPage<>(paginatedUsers);
+                return new ResponseEntity<>(customPage, HttpStatus.OK);
+            } catch (CustomQueryParsing.InvalidQueryFormatException e) {
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
         }
-        return new ResponseEntity<List<Comment>>(item, HttpStatus.OK);
     }
 
     @GetMapping("{id}")

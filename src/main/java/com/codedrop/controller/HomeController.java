@@ -6,7 +6,6 @@ import com.codedrop.model.User;
 import com.codedrop.payload.JwtResponse;
 import com.codedrop.payload.JwtTokenUtil;
 import com.codedrop.service.AuthService;
-import com.codedrop.service.MailerService;
 import com.codedrop.service.impl.UserDetailsImpl;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -34,9 +32,6 @@ public class HomeController {
 
     @Autowired
     private UserDetailsImpl userDetailsService;
-
-    @Autowired
-    MailerService mailerService;
 
     @Autowired
     AuthService authService;

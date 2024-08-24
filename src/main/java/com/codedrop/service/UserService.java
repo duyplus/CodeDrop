@@ -4,12 +4,15 @@ import com.codedrop.model.User;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
     List<User> findAll();
 
     Page<User> findPaginate(int page, int size);
+
+    Page<User> findPaginateWithConditions(int page, int size, Map<String, String> conditions);
 
     User findById(Integer id);
 

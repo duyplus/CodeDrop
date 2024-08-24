@@ -9,30 +9,24 @@ import java.util.List;
 public class CustomPage<T> {
 
     List<T> content;
-    CustomPageable pageable;
+    CustomPageable pagination;
 
     public CustomPage(Page<T> page) {
         this.content = page.getContent();
-        this.pageable = new CustomPageable(
+        this.pagination = new CustomPageable(
             page.getPageable().getPageNumber(),
-            page.getPageable().getPageSize(),
-            page.getTotalPages(),
-            page.getTotalElements()
+            page.getPageable().getPageSize()
         );
     }
 
     @Data
     static class CustomPageable {
-        int pageNumber;
+        int page;
         int pageSize;
-        long totalPages;
-        long totalElements;
 
-        public CustomPageable(int pageNumber, int pageSize, long totalPages, long totalElements) {
-            this.pageNumber = pageNumber;
+        public CustomPageable(int page, int pageSize) {
+            this.page = page;
             this.pageSize = pageSize;
-            this.totalPages = totalPages;
-            this.totalElements = totalElements;
         }
     }
 }
